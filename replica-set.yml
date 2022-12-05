@@ -1,0 +1,25 @@
+ apiVersion: apps/v1
+ kind: ReplicaSet
+ metadata:
+   name: echo
+   labels:
+     app: echo
+     toto: tata
+ spec:
+   replicas: 4
+   selector:
+     matchLabels:
+       toto: tutu
+   template:
+     metadata:
+       labels:
+         toto: tutu
+     spec:
+       containers:
+       - name: echo
+         image: registry.cluster.wik.cloud/public/echo
+         env:
+           - name: PING_LISTEN_PORT
+             value: "8080"
+         ports:
+         - containerPort: 8080
